@@ -1,0 +1,14 @@
+---
+- name: Install required packages
+  apt:
+    update_cache: yes
+    name:
+      - debian-keyring
+      - debian-archive-keyring
+      - apt-transport-https
+    state: present
+
+- name: Install Nginx
+  apt:
+    name: nginx
+    state: present

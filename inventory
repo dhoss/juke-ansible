@@ -1,0 +1,3 @@
+[webservers]
+rpi1.home ansible_connection=ssh ansible_user=devin ansible_become=true ansible_become_method=sudo
+rpi2.home ansible_connection=ssh ansible_user=devin ansible_become=true ansible_become_method=sudo
