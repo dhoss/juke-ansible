@@ -1,2 +1,0 @@
-digitalocean_token: "{{ lookup('ansible.builtin.env', 'DIGITALOCEAN_TOKEN') }}"
-public_key: "{{ lookup('ansible.builtin.file', ansible_env['HOME'] ~ '/.ssh/sammy.key.pub') }}"

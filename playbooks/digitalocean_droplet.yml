@@ -4,7 +4,7 @@
   connection: local
   gather_facts: true
   vars_files:
-    - vars.yml
+    - ../vars/do.yml
 
   tasks:
     - name: Create SSH key
@@ -12,14 +12,14 @@
         state: present
         token: "{{ digitalocean_token }}"
         public_key: "{{ public_key }}"
-        name: sammy
+        name: "juke-{{ env }}"
       register: ssh_key
 
     - name: Create Droplet
       digitalocean.cloud.droplet:
         state: present
         token: "{{ digitalocean_token }}"
-        name: sammy-droplet
+        name: juke-web-droplet
         region: nyc3
         size: s-1vcpu-2gb
         image: ubuntu-22-04-x64

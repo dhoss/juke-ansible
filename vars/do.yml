@@ -1,0 +1,3 @@
+digitalocean_token: "{{ lookup('ansible.builtin.env', 'DIGITALOCEAN_TOKEN') }}"
+public_key: "{{ lookup('ansible.builtin.file', lookup('ansible.builtin.env', 'JUKE_SSH_PUBKEY')) }}"
+env: "{{ lookup('ansible.builtin.env', 'JUKE_ENV') }}"
