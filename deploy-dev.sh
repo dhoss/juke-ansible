@@ -1,0 +1,1 @@
+ ~/projects/juke-do-dev-secrets.sh && ansible-playbook -i inventory/do.yml site.yml -u root
