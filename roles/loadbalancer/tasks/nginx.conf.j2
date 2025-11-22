@@ -1,0 +1,32 @@
+#user  www www;
+
+worker_processes  2;
+
+pid /var/run/nginx.pid;
+
+#                          [ debug | info | notice | warn | error | crit ]
+
+error_log  /var/log/nginx.error_log  info;
+
+events {
+    worker_connections   2000;
+
+    # use [ kqueue | epoll | /dev/poll | select | poll ];
+    use epoll;
+}
+
+http {
+    upstream juke {
+    {% for host in groups['webservers'] %}
+        server {{ hostvars[host]['ansible_facts']['eth0']['ipv4']['address'] }};
+    {% endfor %}
+    }
+
+    server {
+        listen 80;
+
+        location / {
+            proxy_pass http://juke;
+        }
+    }
+}

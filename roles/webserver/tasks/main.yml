@@ -2,7 +2,21 @@
 - name: Install Nginx
   apt:
     name: nginx
-    state: present
+#- name: Nginx web server configuration
+#  ansible.builtin.template:
+#    src: nginx.conf.j2
+#    dest: /etc/nginx/nginx.conf
+#    owner: root
+#    group: root
+#    mode: '0644'
+#    state: present
+- name: Nginx default page config
+  ansible.builtin.template:
+    src: index.html.j2
+    dest: /var/www/html/index.html
+    owner: root
+    group: root
+    mode: '0644'
 - name: Add Docker’s official GPG key
   apt_key:
     url: https://download.docker.com/linux/ubuntu/gpg
