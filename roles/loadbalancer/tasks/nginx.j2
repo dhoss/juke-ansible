@@ -1,0 +1,15 @@
+http {
+    upstream juke {
+    {% for host in groups['loadbalancers'] %}
+        server {{ hostvars[host]['ansible_facts']['eth0']['ipv4']['address'] }};
+    {% endfor %}
+    }
+
+    server {
+        listen 80;
+
+        location / {
+            proxy_pass http://juke;
+        }
+    }
+}

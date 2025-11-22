@@ -7,7 +7,7 @@
     - ../vars/do.yml
 
   tasks:
-    - name: Create SSH key
+    - name: provision ssh key
       digitalocean.cloud.ssh_key:
         state: present
         token: "{{ digitalocean_token }}"
@@ -15,11 +15,11 @@
         name: "juke-{{ env }}"
       register: ssh_key
 
-    - name: Create Droplet
+    - name: provision web servers
       digitalocean.cloud.droplet:
         state: present
         token: "{{ digitalocean_token }}"
-        name: juke-web-droplet
+        name: "juke-web-{{ item }}"
         region: nyc3
         size: s-1vcpu-2gb
         image: ubuntu-22-04-x64
@@ -27,3 +27,30 @@
         unique_name: true
         tags:
           - webservers
+      with_sequence: start=1 end="{{ desired_number_of_webservers }}"
+
+#    - name: provision varnish cache server
+#      digitalocean.cloud.droplet:
+#        state: present
+#        token: "{{ digitalocean_token }}"
+#        name: juke-web-cache
+#        region: nyc3
+#        size: s-1vcpu-2gb
+#        image: ubuntu-22-04-x64
+#        ssh_keys: ["{{ ssh_key.ssh_key.id }}"]
+#        unique_name: true
+#        tags:
+#          - varnish
+
+    - name: provision load balancer
+      digitalocean.cloud.droplet:
+        state: present
+        token: "{{ digitalocean_token }}"
+        name: juke-web-lb
+        region: nyc3
+        size: s-1vcpu-2gb
+        image: ubuntu-22-04-x64
+        ssh_keys: ["{{ ssh_key.ssh_key.id }}"]
+        unique_name: true
+        tags:
+          - loadbalancers
