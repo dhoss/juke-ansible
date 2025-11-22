@@ -6,9 +6,7 @@
       - debian-keyring
       - debian-archive-keyring
       - apt-transport-https
-    state: present
-
-- name: Install Nginx
-  apt:
-    name: nginx
+      - ca-certificates
+      - curl
+      - software-properties-common
     state: present
