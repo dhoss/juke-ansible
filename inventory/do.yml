@@ -34,8 +34,8 @@ keyed_groups:
     prefix: image
     separator: _
   - key: tags
-    prefix: tag
-    separator: _
+   # prefix: tag
+    separator: ""
   - key: region.slug
     prefix: region_slug
     separator: _

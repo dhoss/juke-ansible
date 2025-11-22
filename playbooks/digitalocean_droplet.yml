@@ -25,3 +25,5 @@
         image: ubuntu-22-04-x64
         ssh_keys: ["{{ ssh_key.ssh_key.id }}"]
         unique_name: true
+        tags:
+          - webservers
