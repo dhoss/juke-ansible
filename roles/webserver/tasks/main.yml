@@ -17,6 +17,7 @@
     owner: root
     group: root
     mode: '0644'
+  notify: "restart web services"
 - name: Add Docker’s official GPG key
   apt_key:
     url: https://download.docker.com/linux/ubuntu/gpg

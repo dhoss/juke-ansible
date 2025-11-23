@@ -17,6 +17,7 @@ events {
 
 http {
     upstream juke {
+        least_conn;
     {% for host in groups['webservers'] %}
         server {{ hostvars[host]['ansible_facts']['eth0']['ipv4']['address'] }};
     {% endfor %}
