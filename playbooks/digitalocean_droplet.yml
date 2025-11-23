@@ -9,7 +9,7 @@
   tasks:
     - name: provision ssh key
       digitalocean.cloud.ssh_key:
-        state: present
+        state: absent #present
         token: "{{ digitalocean_token }}"
         public_key: "{{ public_key }}"
         name: "juke-{{ env }}"
@@ -17,7 +17,7 @@
 
     - name: provision web servers
       digitalocean.cloud.droplet:
-        state: present
+        state: absent # present
         token: "{{ digitalocean_token }}"
         name: "juke-web-{{ item }}"
         region: nyc3
@@ -44,7 +44,7 @@
 
     - name: provision load balancer
       digitalocean.cloud.droplet:
-        state: present
+        state: absent # present
         token: "{{ digitalocean_token }}"
         name: juke-web-lb
         region: nyc3
